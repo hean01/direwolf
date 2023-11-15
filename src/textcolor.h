@@ -10,18 +10,19 @@
 
 #ifndef TEXTCOLOR_H
 #define TEXTCOLOR_H 1
-
-enum dw_color_e { 	DW_COLOR_INFO,		/* black */
-			DW_COLOR_ERROR,		/* red */
-			DW_COLOR_REC,		/* green */
-			DW_COLOR_DECODED,	/* blue */
-			DW_COLOR_XMIT,		/* magenta */
-			DW_COLOR_DEBUG		/* dark_green */
-		};
+#include <stdarg.h>
+enum dw_color_e {
+    DW_COLOR_INFO = 0, 	/* foreground */
+    DW_COLOR_ERROR,	 	/* red */
+    DW_COLOR_REC,		/* green */
+    DW_COLOR_DECODED,	/* blue */
+    DW_COLOR_XMIT,		/* magenta */
+    DW_COLOR_DEBUG		/* dark_white */
+};
 
 typedef enum dw_color_e dw_color_t;
 
-			
+	
 void text_color_init (int enable_color);
 void text_color_set (dw_color_t c);
 void text_color_term (void);
@@ -48,11 +49,7 @@ void text_color_term (void);
 
 
 
-int dw_printf (const char *fmt, ...) 
-#if __WIN32__
-				__attribute__((format(ms_printf,1,2)));		/* Win C lib. */
-#else
-				__attribute__((format(printf,1,2)));		/* gnu C lib. */
-#endif
+int dw_printf(const char *fmt, ...);
+int dw_fprintf(FILE *stream, const char *fmt, ...);
 
 #endif
